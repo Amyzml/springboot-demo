@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2 th:text="${user.name}">hello.springBoot</h2>
+    <h2 th:text="${session.age}">12</h2>
+    <h2 th:text="${param.q}"></h2>
+
+    <h2 th:if="${user.name == 'rose'}">hello,rose</h2>
+    <h2 th:unless="${user.name == 'jack'}">hello,jack</h2>
+    <ul th:switch="${user.name}">
+        <li th:case="'rose'">this.rose</li>
+        <li th:case="'jack'">this.jack</li>
+        <li th:case="*">other</li>
+    </ul>
+
+    <ul><li th:each="user : ${userList}" th:text="${user}"></li></ul>
+
+    <input type="text" th:value="${user.name}">
+    <h2 th:attr="user-name=${user.name},user-address=${user.address}"></h2>
+
+    <a th:href="@{/user/(id=${user.id})}"></a>
+    <a th:href="@{/user/{id}/(id=${user.id})}"></a>
+
+    <img th:src="@{'/image/2.jpg'}" src="../static/image/2.jpg">
+
+
+    <script th:inline="javascript">
+        [# th:if = "${user.name == rose}"]
+            var id = [[${user.id}]];
+            var name =  [[${user.name}]];
+        [/]
+    </script>
+</body>
+</html>
